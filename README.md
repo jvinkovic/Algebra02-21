@@ -1,2 +1,2 @@
-Branches are organized by date of leture with commit as examples progressed through the leacture (mostly).
-This branch is intentionaly empty.
+Branches are organized by date of lecture with commits as example(s) progressed throughout the leacture (mostly).
+This branch is intentionally empty.
