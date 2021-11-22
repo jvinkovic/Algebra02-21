@@ -5,20 +5,20 @@ export default function Vj512() {
     const [ users, setUsers] = useState([{ name: 'Nikola', age: 40 },
                                             { name: 'Mate (solo)', age: 109 },
                                             { name: 'Štef', age: 61 }]);   
-    const handleRename = (newName) => {
+    const handleRename = (newName, idx) => {
         // NE
-        // users[0].name = newName;
+        // users[idx].name = newName;
         
         const newUsers = [...users];
-        newUsers[0].name = newName;
+        newUsers[idx].name = newName;
 
         setUsers(newUsers);
     }
 
     return (
         <div>
-            <User usr={users[0]} onRename={handleRename} />
-            <User usr={users[1]} />
-            <User usr={users[2]} />
+            <User usr={users[0]} onRename={(ime) => handleRename(ime, 0)} />
+            <User usr={users[1]} onRename={(ime) => handleRename(ime, 1)} />
+            <User usr={users[2]} onRename={(ime) => handleRename(ime, 2)} />
         </div>);   
 }
