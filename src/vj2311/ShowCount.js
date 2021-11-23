@@ -1,9 +1,10 @@
 import React from 'react';
+import { divider } from './SharedStuff';
 
-export default function ShowCount({ totalCount, count3, last }) {
+export default function ShowCount({ totalCount, divisibleCount, last }) {
     return (<div>
                 <p>Count: {totalCount}</p>
-                <p>3 count: {count3}</p>
-                <p>Last divisible by 3: {last}</p>
+                <p>{divider} count: {divisibleCount}</p>
+                <p>Last divisible by {divider}: {last}</p>
             </div>);
 }

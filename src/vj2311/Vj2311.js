@@ -1,32 +1,30 @@
 import React from 'react';
 import FensiButton from './FensiButton';
 import ShowCount from './ShowCount';
+import { divider } from './SharedStuff';
 
 export default class Vj2311 extends React.Component {
     state = {
         total: 0,
-        count3: 0,
-        lastDivisible: 0
-    }
+        divisibleCount: 0
+    }    
 
     makeAdd = () => {
         const newTotal = this.state.total + 1;
-        let newCount3 = this.state.count3;
-        let newLastDivisible = this.state.lastDivisible;
+        let newDivisibleCount = this.state.divisibleCount;
 
-        if(newTotal % 3 === 0) {
-            newCount3++;
-            newLastDivisible=newTotal;
+        if(newTotal % divider === 0) {
+            newDivisibleCount++;
         }
 
-        this.setState({ total: newTotal, count3: newCount3, lastDivisible: newLastDivisible});
+        this.setState({ total: newTotal, divisibleCount: newDivisibleCount});
     }
 
     render() {
         return (<div>
                     <ShowCount totalCount={this.state.total} 
-                                count3={this.state.count3} 
-                                last={this.state.lastDivisible} />
+                                divisibleCount={this.state.divisibleCount} 
+                                last={this.state.divisibleCount * divider} />
                     <FensiButton onBtnClick={this.makeAdd}>ADD</FensiButton>
                 </div>);
     };   
