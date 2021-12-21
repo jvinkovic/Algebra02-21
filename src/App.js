@@ -1,32 +1,18 @@
 import React, { useState } from 'react';
+import { NavLink, Route, Switch } from 'react-router-dom';
 
 import Input from './Input';
 import TaskList from './TaskList';
+
+import './App.css';
 
 // task
 // { id: 2, title: 'neki task', completed: false }
 
 let lastId = 0;
 
-const ALL = 'ALL';
-const ACTIVE = 'ACTIVE';
-const COMPLETED = 'COMPLETED';
-
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState(ALL);
-
-  const showAll = () => {
-    setFilter(ALL);
-  }
-
-  const showActive = () => {
-    setFilter(ACTIVE);
-  }
-
-  const showCompleted = () => {
-    setFilter(COMPLETED);
-  }
 
   const handleTaskAdd = (taskText) => {
     lastId++;
@@ -59,20 +45,6 @@ function App() {
     setTasks(tasksCopy);
   }
 
-  const getFiltered = () => {
-    if(filter === ALL) {
-      return tasks;
-    }
-
-    if (filter === ACTIVE) {
-      return tasks.filter(t => t.completed === false);
-    }
-
-    if (filter === COMPLETED) {
-      return tasks.filter(t => t.completed);
-    }
-  }
-
   const shouldShowCompleted = () => { 
     return tasks.find(t => t.completed);
   }
@@ -81,12 +53,26 @@ function App() {
     <div>
       <h1>T O D O</h1>
       <section>
-        <button onClick={showAll}>All</button>
-        <button onClick={showActive}>Active</button>
-        <button onClick={showCompleted}>Completed</button>
+        <NavLink to='/all' className={isActive => isActive ? "selected" : ""}>All</NavLink>
+        <NavLink to='/active' className={isActive => isActive ? "selected" : ""}>Active</NavLink>
+        <NavLink to='/completed' className={isActive => isActive ? "selected" : ""}>Completed</NavLink>
       </section>
       <Input onNewTask={handleTaskAdd} />
-      <TaskList taskovi={getFiltered()} onDelete={deleteTask} onCompleteToggle={toggleCompleteTask} />
+
+      <Switch>
+        <Route path='/active'>
+          <TaskList taskovi={tasks.filter(t => !t.completed)} onDelete={deleteTask} onCompleteToggle={toggleCompleteTask} />
+        </Route>
+
+        <Route path='/completed'>
+          <TaskList taskovi={tasks.filter(t => t.completed)} onDelete={deleteTask} onCompleteToggle={toggleCompleteTask} />
+        </Route>
+        
+        <Route path='/'>
+          <TaskList taskovi={tasks} onDelete={deleteTask} onCompleteToggle={toggleCompleteTask} />
+        </Route>
+      </Switch>
+
       {shouldShowCompleted() && (<div onClick={clearCompleted}>Clear completed</div>)}
     </div>
   );

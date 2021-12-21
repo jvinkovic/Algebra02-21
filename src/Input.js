@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Input extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ export default class Input extends React.Component {
 
         const trimaniTekst = this.state.text.trim();
         if(trimaniTekst) {
-            this.props.onNewTask(this.state.text);
+            this.props.onNewTask(trimaniTekst);
             this.setState({text: ''});
         }
     }
@@ -30,4 +31,8 @@ export default class Input extends React.Component {
                     <input type='submit' value='Add'/>
                 </form>);
     }
+}
+
+Input.propTypes = {
+    onNewTask: PropTypes.func.isRequired
 }

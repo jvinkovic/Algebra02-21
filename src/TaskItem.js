@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function TaskItem({task, onDeleteTask, onCompleteToggle}) {
     const removeTask = () => {
@@ -20,4 +21,10 @@ export default function TaskItem({task, onDeleteTask, onCompleteToggle}) {
                 <span style={getStyle()} onClick={toggleComplete}>{task.title}</span>
                 <button onClick={removeTask}>X</button>
             </div>);
+}
+
+TaskItem.propTypes = {
+    task: PropTypes.object.isRequired,
+    onCompleteToggle: PropTypes.func.isRequired,
+    onDeleteTask: PropTypes.func.isRequired
 }

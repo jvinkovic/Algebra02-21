@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import TaskItem from './TaskItem';
 
@@ -12,4 +13,10 @@ export default class TaskList extends React.Component {
                                                 task={t} />)}
                 </div>);
     }
+}
+
+TaskList.propTypes = {
+    taskovi: PropTypes.array.isRequired,
+    onCompleteToggle: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 }
